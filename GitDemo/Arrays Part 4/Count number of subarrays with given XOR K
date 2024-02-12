@@ -1,0 +1,24 @@
+class Solution{
+
+    public static int subarraysWithXOR(int[] A, int B) {
+        int count = 0;
+        int xor = 0;
+        Map<Integer, Integer> xorCount = new HashMap<>();
+
+        for (int num : A) {
+            xor ^= num;
+
+            if (xor == B) {
+                count++;
+            }
+
+            if (xorCount.containsKey(xor ^ B)) {
+                count += xorCount.get(xor ^ B);
+            }
+            xorCount.put(xor, xorCount.getOrDefault(xor, 0) + 1);
+        }
+
+        return count;
+    }
+}
+    
